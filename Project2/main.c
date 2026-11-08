@@ -75,7 +75,7 @@ int main() {
     return 0;
 }
 
-// 3. Сама функция внизу
+
 struct Date get_date(int d, int m, int y, int s) {
     struct Date result;
 
