@@ -1,7 +1,8 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <locale.h>
 
 struct Product {
+
     int index;
     int day;
     int month;
@@ -14,12 +15,13 @@ struct Product {
 
 typedef struct Product Product;
 
-void inputnameend(Product res, Product p);
-Product inputname(); 
-Product getdate(int d, int m, int y, int s);
+void inputnameend(Product res,Product p);
+Product inputname();
+Product getdate(int d,int m,int y,int s);
 
 int main() {
-    setlocale(LC_ALL, "RUS");
+
+    setlocale(LC_ALL,"RUS");
 
     Product p1;
     Product p2;
@@ -32,17 +34,17 @@ int main() {
     p2 = inputname();
     p3 = inputname();
 
-    res1 = getdate(p1.day, p1.month, p1.year, p1.srok);
-    res2 = getdate(p2.day, p2.month, p2.year, p2.srok);
-    res3 = getdate(p3.day, p3.month, p3.year, p3.srok);
+    res1 = getdate(p1.day,p1.month,p1.year,p1.srok);
+    res2 = getdate(p2.day,p2.month,p2.year,p2.srok);
+    res3 = getdate(p3.day,p3.month,p3.year,p3.srok);
 
     printf("\n\n========================================\n");
     printf("          РЕЗУЛЬТАТЫ ОБРАБОТКИ          \n");
     printf("========================================\n");
 
-    inputnameend(res1, p1);
-    inputnameend(res2, p2);
-    inputnameend(res3, p3);
+    inputnameend(res1,p1);
+    inputnameend(res2,p2);
+    inputnameend(res3,p3);
 
     printf("========================================\n");
 
@@ -50,42 +52,37 @@ int main() {
 }
 
 Product inputname() {
+
     Product p;
+
     printf("Товар №");
-    scanf("%d", &p.index);
+    scanf("%d",&p.index);
     printf("Символ наименования: ");
-    scanf(" %c", &p.name);
+    scanf(" %c",&p.name);
     printf("Дата производства (д м г): ");
-    scanf("%d %d %d", &p.day, &p.month, &p.year);
+    scanf("%d %d %d",&p.day,&p.month,&p.year);
     printf("Срок годности (дней): ");
-    scanf("%d", &p.srok);
+    scanf("%d",&p.srok);
     printf("Цена: ");
-    scanf("%lf", &p.price);
+    scanf("%lf",&p.price);
     printf("Номер серии: ");
-    scanf("%d", &p.num);
+    scanf("%d",&p.num);
     printf("\n");
+
     return p;
 }
 
-void inputnamend(Product res, Product p) {
-    printf("Товар %d == Наименование: %c  == Годен до: %02d.%02d.%d\n", p.index, p.name, res.day, res.month, res.year);
+void inputnamend(Product res,Product p) {
+    printf("Товар %d == Наименование: %c  == Годен до: %02d.%02d.%d\n",p.index,p.name,res.day,res.month,res.year);
 }
 
-Product getdate(int d, int m, int y, int s) {
+Product getdate(int d,int m,int y,int s) {
+
     Product result;
 
-    result.day = d + s;
-    result.month = m;
+    result.day = (d+s)%30;
+    result.month += m;
     result.year = y;
 
-    while (result.day > 30) {
-        result.day = result.day - 30;
-        result.month++;
-    }
-
-    while (result.month > 12) {
-        result.month = result.month - 12;
-        result.year++;
-    }
     return result;
 }
