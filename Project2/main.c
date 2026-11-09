@@ -79,10 +79,20 @@ void inputnamend(Product res,Product p) {
 Product getdate(int d,int m,int y,int s) {
 
     Product result;
-
-    result.day = (d+s)%30;
+    
     result.month += m;
     result.year = y;
 
-    return result;
+    while (result.day > 30) {
+        result.day = result.day - 30;
+        result.month++;
+    }
+
+    while (result.month > 12) {
+        result.month = result.month - 12;
+        result.year++;
+
+
+        return result;
+    }
 }
